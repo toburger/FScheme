@@ -65,6 +65,10 @@ let form () =
     running := true
     f
 
-let run cont _ = Application.Run(form ()); Dummy("Dummy 'run'.") |> cont
+let run cont _ =
+    Application.EnableVisualStyles()
+    Application.SetCompatibleTextRenderingDefault(false)
+    Application.Run(form ())
+    Dummy("Dummy 'run'.") |> cont
 
 let init () = environment.Head := environment.Head.Value.Add("run", ref (Function(run))) 
